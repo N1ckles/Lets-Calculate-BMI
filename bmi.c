@@ -16,13 +16,13 @@ int main(int argc, char *argv[])
 	double bmi = (w / (h * h));
 	
 	if (bmi <= 18.5) 
-		printf("You're underweight, you emo, you!\n");
+		printf("You're underweight.\n");
 	else if (bmi <= 25.0)
-		printf("You're supposedly normal. Pffft, I bet you're ugly!\n");
+		printf("You're healthy.\n");
 	else if (bmi <= 30.0)
-		printf("You're fat! Lose some weight, fatty!\n");
+		printf("You're overweight.\n");
 	else
-		printf("You're a whale, congratulations!\n");
+		printf("Holy McShizzle, you're freaking whale!\n");
 
 
 	printf("Your BMI was: %.3f\n", bmi);

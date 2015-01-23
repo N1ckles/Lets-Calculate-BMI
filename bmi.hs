@@ -8,7 +8,7 @@ main = do
 
 bmiCalc :: (RealFloat a) => a -> a -> String  
 bmiCalc w h 
-    | w / h ^ 2 <= 18.5 = "You're underweight, you emo, you!"  
-    | w / h ^ 2 <= 25.0 = "You're supposedly normal. Pffft, I bet you're ugly!"  
-    | w / h ^ 2 <= 30.0 = "You're fat! Lose some weight, fatty!"  
-    | otherwise         = "You're a whale, congratulations!" 
+    | w / h ^ 2 <= 18.5 = "You're underweight."
+    | w / h ^ 2 <= 25.0 = "You're healthy."
+    | w / h ^ 2 <= 30.0 = "You're overweight."
+    | otherwise         = "Holy McShizzle, you're freaking whale!"
