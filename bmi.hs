@@ -5,7 +5,7 @@ main = do
 	height <- getLine
 
 	putStrLn (bmiCalc (read weight) (read height))
-
+	putStrLn ("Your BMI is: " ++ (show ((read weight) / ((read height)^2))))
 bmiCalc :: (RealFloat a) => a -> a -> String  
 bmiCalc w h 
     | w / h ^ 2 <= 18.5 = "You're underweight."
