@@ -1,5 +1,5 @@
-var weight=parseFloat(prompt("Enter weight:"));
-var height=parseFloat(prompt("Enter height:"));
+var weight=parseFloat(prompt("Enter weight [kg]:"));
+var height=parseFloat(prompt("Enter height [m]:"));
 var bmi=weight / (height * height);
 
 alert("Your BMI is: "+bmi);

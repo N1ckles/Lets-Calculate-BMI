@@ -5,7 +5,7 @@ using namespace std;
 
 int main(int argc, char* argv[]){
 	if(argc!=3){
-		cout<<"Usage: "<<argv[0]<<" <weight> <height>"<<endl;
+		cout<<"Usage: "<<argv[0]<<" <weight [kg]> <height [m]>"<<endl;
 	}else{
 		double height=atof(argv[2]);
 		double weight=atof(argv[1]);

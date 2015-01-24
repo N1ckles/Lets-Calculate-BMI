@@ -16,4 +16,4 @@ if len(sys.argv)==3:
 	else:
 		print("Holy McShizzle, you're freaking whale!")
 else:
-	print("Usage: "+sys.argv[0]+" <weight> <height>")
+	print("Usage: "+sys.argv[0]+" <weight [kg]> <height [m]>")
