@@ -7,7 +7,7 @@ BMI=Weight / Height^2
 ```
 ##Commandline syntax
 ```
-<command> <weight> <height>
+<command> <weight [kg]> <height [m]>
 ```
 ##Output
 The program has to output the BMI-number and one of the following messages:
