@@ -5,13 +5,13 @@
 int main(int argc, char *argv[])
 {
 	if (argc != 3) {
-		printf("Usage: %s weight[Kg] height[cm]\n", argv[0]);
+		printf("Usage: %s weight[Kg] height[m]\n", argv[0]);
 		exit(EXIT_SUCCESS);
 	}
 
 	double w, h;
 	w = atof(argv[1]);
-	h = atof(argv[2]) / 100;
+	h = atof(argv[2]);
 
 	double bmi = (w / (h * h));
 	
