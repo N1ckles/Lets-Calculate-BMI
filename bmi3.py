@@ -3,7 +3,7 @@ import sys
 if len(sys.argv)==3:
 	weight=float(sys.argv[1])
 	height=float(sys.argv[2])
-	bmi=weight / (height * height)
+	bmi=weight / (height ** 2)
 	
 	print("Your BMI is " + str(bmi))
 
