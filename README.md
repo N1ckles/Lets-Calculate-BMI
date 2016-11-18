@@ -10,8 +10,12 @@ BMI=Weight / Height^2
 <command> <weight [kg]> <height [m]>
 ```
 ##Output
-The program has to output the BMI-number and one of the following messages:
+The program should output the exact BMI-value with two decimals using the following:
+```cpp
+cout << "Your BMI is: " << bmi << endl;
 ```
+Afterwards one of the following messages should be printed:
+```cpp
 if(bmi <= 18.5)
 {
 	output="You're underweight.";
