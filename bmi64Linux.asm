@@ -5,20 +5,21 @@ section .text
 global _start
 
 _start:
-	mov rsi, weightMsg
-	mov rdx, weightMsgLen
-	mov rbx, weightStr
-	call prompt
-		
+	cmp qword [rsp], 3 ; check argument count
+	jne usage
+
+	mov rax, weightStr
+	mov rbx, [rsp + 16]
+	call copyString
+
+	mov rax, heightStr
+	mov rbx, [rsp + 24]
+	call copyString
+
 	mov rsi, weightStr
 	mov r11, weightBase
 	mov r12, weightExp
 	call parseNumber
-
-	mov rsi, heightMsg
-	mov rdx, heightMsgLen
-	mov rbx, heightStr
-	call prompt
 
 	mov rsi, heightStr
 	mov r11, heightBase
@@ -162,31 +163,31 @@ printAndExit:
 	mov rax, 1
 	mov rdi, 1
 	syscall
-	
+
+exit:
 	mov rax, 60
 	mov rdi, 0
 	syscall
 
-; PROMPT ----------------------------------------------------------------------
-; input:
-;	rsi: address of string
-;	rdx: length of string
-;	rbx: address of result string
-; output:
-;	result in buffer at address rbx
-prompt:
+usage:
 	mov rax, 1
 	mov rdi, 1
+	mov rsi, usageMsg
+	mov rdx, usageMsgLen
 	syscall
+	jmp exit
 
-	mov rax, 0
-	mov rdi, 0
-	mov rsi, rbx
-	mov rdx, 10
-	syscall
-	
+copyString:
+	xor rcx, rcx
+	dec rcx
+copyStringLoop:
+	inc rcx
+	mov dl, [rbx + rcx]
+	mov byte [rax + rcx], dl
+	cmp byte [rbx + rcx], 0
+	jne copyStringLoop
 	ret
-	
+
 ; PARSE NUMBER ----------------------------------------------------------------
 ; input:
 ;	rsi: address of string to parse
@@ -224,7 +225,7 @@ parseIntLoop:
 	mov [rcx], rax 
 	add [rcx], r14b
 	inc rbx
-	cmp byte [rsi + rbx], 0x0a
+	cmp byte [rsi + rbx], 0
 	je parseIntAddComma
 	cmp byte [rsi + rbx], '.'
 	je parseIntComma
@@ -249,7 +250,7 @@ parseIntDone:
 parseExponent:
 	xor rbx, rbx
 parseExponentLoop:
-	cmp byte [rsi + rbx], 0x0a
+	cmp byte [rsi + rbx], 0
 	je parseExponentDone
 	inc rbx
 	jmp parseExponentLoop
@@ -260,12 +261,6 @@ parseExponentDone:
 
 ; DATA SECTION ----------------------------------------------------------------
 section .data
-	weightMsg db 'Enter your weight in kg: '
-	weightMsgLen equ $ - weightMsg
-
-	heightMsg db 'Enter your height in meter: '
-	heightMsgLen equ $ - heightMsg
-
 	yourBMIMsg db 'Your BMI is: '
 	yourBMIMsgLen equ $ - yourBMIMsg
 
@@ -280,6 +275,9 @@ section .data
 
 	underweightMsg db 'You', 0x27, 're underweight.', 0x0a
 	underweightMsgLen equ $ - underweightMsg
+
+	usageMsg db 'Usage: a.out <weight [kg]> <height [m]>', 0x0a
+	usageMsgLen equ $ - usageMsg
 
 	comma	db '.'
 
