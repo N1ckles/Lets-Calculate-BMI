@@ -170,6 +170,23 @@ exit:
 	syscall
 
 usage:
+	mov rax, programName
+	mov rbx, [rsp + 8]
+	call copyString
+	mov [programNameLen], rdx
+
+	mov rax, 1
+	mov rdi, 1
+	mov rsi, usageStr
+	mov rdx, usageStrLen
+	syscall
+
+	mov rax, 1
+	mov rdi, 1
+	mov rsi, programName
+	mov rdx, programNameLen
+	syscall
+
 	mov rax, 1
 	mov rdi, 1
 	mov rsi, usageMsg
@@ -276,7 +293,10 @@ section .data
 	underweightMsg db 'You', 0x27, 're underweight.', 0x0a
 	underweightMsgLen equ $ - underweightMsg
 
-	usageMsg db 'Usage: a.out <weight [kg]> <height [m]>', 0x0a
+	usageStr db 'Usage: '
+	usageStrLen equ $ - usageStr
+
+	usageMsg db ' <weight [kg]> <height [m]>', 0x0a
 	usageMsgLen equ $ - usageMsg
 
 	comma	db '.'
@@ -297,3 +317,5 @@ section .bss
 	weightStr resb 10
 	bmiStr	resb 10
 	bmiStrLen resq 0
+	programName resb 255
+	programNameLen resb 1
