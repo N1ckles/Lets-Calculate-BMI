@@ -1,0 +1,23 @@
+If (Program.ArgumentCount <> 2) Then
+  TextWindow.WriteLine("Usage: bmi <weight [kg]> <height [m]>")
+  Program.End()
+EndIf
+
+weight = Program.GetArgument(1)
+height = Program.GetArgument(2)
+
+bmi = weight / Math.Power(height, 2)
+
+TextWindow.Write("Your BMI is: ")
+TextWindow.WriteLine(bmi)
+
+If (bmi <= 18.5) Then
+  TextWindow.WriteLine("You're underweight.")
+ElseIf (bmi <= 25) Then
+  TextWindow.WriteLine("You're healthy.")
+ElseIf (bmi <= 30) Then
+  TextWindow.WriteLine("You're overweight.")
+Else
+  TextWindow.WriteLine("Holy McShizzle, you're freaking whale!")
+EndIf
+  
