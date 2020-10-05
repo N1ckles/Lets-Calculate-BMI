@@ -24,7 +24,7 @@ Questions should be asked in the following order:
 
 ```Enter weight [kg]:```
 
-```Enter height [kg]:```
+```Enter height [m]:```
 
 Answers should be filled in on either the same line or right below.
 
