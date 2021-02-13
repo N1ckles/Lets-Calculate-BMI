@@ -1,40 +1,24 @@
-use std::io;
+use std::env;
+use std::error::Error;
 
-fn main() {
-    println!("Usage: <command> <weight [kg]> <heigth [m]>");
-
-    let mut w = String::new();
-    
-    io::stdin()
-        .read_line(&mut w)
-        .expect("");
-    
-    let w: f32 = w.trim().parse().unwrap();
-
-
-    let mut h = String::new();
-    io::stdin()
-        .read_line(&mut h)
-        .expect("");
-
-    let h: f32 = h.trim().parse().unwrap();
-    let bmi = w / (h * h);
-
-    if bmi <= 18.5{
-        println!("You're underweight.\n");
+fn main() -> Result<(), Box<dyn Error>> {
+    let args: Vec<_> = env::args().collect();
+    if args.len() != 3 {
+        println!("Usage: {} <weight [kg]> <height [m]>", args[0]);
+        return Ok(());
     }
 
-    else if bmi <= 25.0{
-        println!("You're healthy.\n");
-    }
+    let weight = args[1].parse::<f64>()?;
+    let height = args[2].parse::<f64>()?;
+    let bmi = weight / height.powi(2);
+    println!("Your BMI is: {}", bmi);
 
-    else if bmi <= 30.0{
-        println!("You're overweight.\n");
-    }
+    println!("{}", match bmi {
+        bmi if bmi <= 18.5 => "You're underweight.",
+        bmi if bmi <= 25.0 => "You're healthy.",
+        bmi if bmi <= 30.0 => "You're overweight.",
+        _ => "Holy McShizzle, you're freaking whale!"
+    });
 
-    else{
-        println!("Holy McShizzle, you're freaking whale!\n");
-    }
-    
-    println!("Your BMI was {}", bmi);
+    Ok(())
 }
